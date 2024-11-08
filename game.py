@@ -55,13 +55,26 @@ class Game:
             self.game()
         elif option == str("quit"):
             sys.exit(0)
-
-    def game(self):
-        name, sign = map(str, input("enter the name then space then sign of the first player\n").split())
-        self.player1 = Player(name,sign)
-        name, sign = map(str, input("enter the name then space then sign of the second player\n").split())
-        self.player2 = Player(name,sign)
+    def  creat_players(self):
+        while True:
+            try:
+                name, sign = map(str, input("enter the name then space then sign of the first player\n").split())
+                self.player1 = Player(name, sign)
+                break
+            except ValueError:
+                # Catch the error when there aren't exactly two inputs
+                print("Error: Please enter both a name and a symbol (e.g., 'Alice X'). Try again.")
+        while True:
+            try:
+                name, sign = map(str, input("enter the name then space then sign of the second player\n").split())
+                self.player2 = Player(name, sign)
+                break
+            except ValueError:
+                # Catch the error when there aren't exactly two inputs
+                print("Error: Please enter both a name and a symbol (e.g., 'Alice X'). Try again.")
         self.current_player = self.player1
+    def game(self):
+        self.creat_players()
         self.my_board.show_board()
         while 1 :
             row=None
