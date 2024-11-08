@@ -1,9 +1,9 @@
 import sys
-from show_map import Map
+from game import Game
 
 def main():
-    my_map = Map()
-    my_map.main_menu()
+    my_game = Game()
+    my_game.start_game()
 
 if __name__ == "__main__":
     main()
