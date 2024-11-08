@@ -21,41 +21,25 @@ class Game:
 
     def is_win(self):
         """column winner"""
-        if self.my_board.map[0][0] == self.my_board.map[1][0] == self.my_board.map[2][0] != " ":
-            self.current_player.player1_add_score()
-            print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
-            self.main_menu()
-        elif self.my_board.map[0][1] == self.my_board.map[1][1] == self.my_board.map[2][1] != " ":
-            self.current_player.player1_add_score()
-            print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
-            self.main_menu()
-        elif self.my_board.map[0][2] == self.my_board.map[1][2] == self.my_board.map[2][2] != " ":
-            self.current_player.player1_add_score()
-            print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
-            self.main_menu()
-
+        for i in range(0, 2):
+            if self.my_board.map[0][i] == self.my_board.map[1][i] == self.my_board.map[2][i] != " ":
+                self.current_player.player_add_score()
+                print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
+                self.main_menu()
         """row winner"""
-
-        if self.my_board.map[0][0] == self.my_board.map[0][1] == self.my_board.map[0][2] != " ":
-            self.current_player.player1_add_score()
-            print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
-            self.main_menu()
-        elif self.my_board.map[1][0] == self.my_board.map[1][1] == self.my_board.map[1][2] != " ":
-            self.current_player.player1_add_score()
-            print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
-            self.main_menu()
-        elif self.my_board.map[2][0] == self.my_board.map[2][1] == self.my_board.map[2][2] != " ":
-            self.current_player.player1_add_score()
-            print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
-            self.main_menu()
+        for i in range(0,2):
+            if self.my_board.map[i][0] == self.my_board.map[i][1] == self.my_board.map[i][2] != " ":
+                self.current_player.player_add_score()
+                print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
+                self.main_menu()
 
         """diagonal winner"""
         if self.my_board.map[0][0] == self.my_board.map[1][1] == self.my_board.map[2][2] != " ":
-            self.current_player.player1_add_score()
+            self.current_player.player_add_score()
             print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
             self.main_menu()
         elif self.my_board.map[0][2] == self.my_board.map[1][1] == self.my_board.map[2][0] != " ":
-            self.current_player.player1_add_score()
+            self.current_player.player_add_score()
             print(f"winner is {self.current_player.player_name} with score = {self.current_player.player_score}")
             self.main_menu()
 
@@ -78,20 +62,20 @@ class Game:
         name, sign = map(str, input("enter the name then space then sign of the second player\n").split())
         self.player2 = Player(name,sign)
         self.current_player = self.player1
+        self.my_board.show_board()
         while 1 :
-            self.my_board.show_board()
             row=None
             column = None
             ret = False
             while not ret:
                 try:
+                    print(f"{self.current_player.player_name} turn")
                     row, column = map(int, input("enter the row then space then column\n").split())
                 except ValueError:
                     print("Error: Please enter exactly two values.")
                 except Exception as e:
                     print(f"An unexpected error occurred: {e}")
                 ret = self.check_row_column(row,column)
-                self.my_board.show_board()
             if not ret:
                 continue
             self.my_board.modify_board(row, column,self.current_player.player_sign)

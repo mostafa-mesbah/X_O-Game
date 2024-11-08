@@ -1,4 +1,4 @@
-import sys
+
 from game import Game
 
 def main():
