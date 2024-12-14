@@ -54,7 +54,6 @@ class Game:
         elif self.my_board.map[0][2] == self.my_board.map[1][1] == self.my_board.map[2][0] != " ":
             self.winnig_action()
 
-            self.is_draw()
 
 
     """could be in separate class"""
@@ -69,6 +68,7 @@ class Game:
             self.game()
         elif option == str("quit"):
             sys.exit(0)
+
     def  creat_players(self):
         while True:
             try:
@@ -88,6 +88,7 @@ class Game:
                 print("Error: Please enter both a name and a symbol (e.g., 'Alice X'). Try again.")
         self.current_player = self.player1
     def game(self):
+        self.my_board.clear_board()
         self.creat_players()
         self.my_board.show_board()
         while True :

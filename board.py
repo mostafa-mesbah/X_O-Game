@@ -10,7 +10,8 @@ class Board:
         row=row-1
         column=column-1
         self.map[row][column] = sign
-
+    def clear_board(self):
+        self.map = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
 
 
